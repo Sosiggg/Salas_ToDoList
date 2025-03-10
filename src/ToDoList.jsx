@@ -60,51 +60,52 @@ export default function TodoList() {
                 </button>
             </div>
 
-            {/* Filter Buttons */}
             <div className="filter-container">
                 <button className={filter === "all" ? "active" : ""} onClick={() => setFilter("all")}>All</button>
                 <button className={filter === "completed" ? "active" : ""} onClick={() => setFilter("completed")}>Completed</button>
                 <button className={filter === "pending" ? "active" : ""} onClick={() => setFilter("pending")}>Pending</button>
             </div>
 
-            <ul>
-                {filteredTasks.map((t, index) => (
-                    <li key={index}>
-                        <input 
-                            type="checkbox" 
-                            checked={t.completed} 
-                            onChange={() => toggleComplete(index)} 
-                        />
-                        
-                        {editingIndex === index ? (
+            <div className="task-list-container">
+                <ul>
+                    {filteredTasks.map((t, index) => (
+                        <li key={index}>
                             <input 
-                                type="text" 
-                                value={editedTask} 
-                                onChange={(e) => setEditedTask(e.target.value)} 
-                                autoFocus
+                                type="checkbox" 
+                                checked={t.completed} 
+                                onChange={() => toggleComplete(index)} 
                             />
-                        ) : (
-                            <span className={t.completed ? "completed task-text" : "task-text"}>{t.text}</span>
-                        )}
-
-                        <div className="task-actions">
-                            {editingIndex === index ? (
-                                <button className="save-btn" onClick={() => saveEdit(index)}>
-                                    <i className="fas fa-save"></i>
-                                </button>
-                            ) : (
-                                <button className="edit-btn" onClick={() => startEditing(index)}>
-                                    <i className="fas fa-edit"></i>
-                                </button>
-                            )}
                             
-                            <button className="delete-btn" onClick={() => removeTask(index)}>
-                                <i className="fas fa-trash"></i>
-                            </button>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+                            {editingIndex === index ? (
+                                <input 
+                                    type="text" 
+                                    value={editedTask} 
+                                    onChange={(e) => setEditedTask(e.target.value)} 
+                                    autoFocus
+                                />
+                            ) : (
+                                <span className={t.completed ? "completed task-text" : "task-text"}>{t.text}</span>
+                            )}
+
+                            <div className="task-actions">
+                                {editingIndex === index ? (
+                                    <button className="save-btn" onClick={() => saveEdit(index)}>
+                                        <i className="fas fa-save"></i>
+                                    </button>
+                                ) : (
+                                    <button className="edit-btn" onClick={() => startEditing(index)}>
+                                        <i className="fas fa-edit"></i>
+                                    </button>
+                                )}
+                                
+                                <button className="delete-btn" onClick={() => removeTask(index)}>
+                                    <i className="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </li>
+                    ))}
+                </ul>
+            </div>
         </div>
     );
 }

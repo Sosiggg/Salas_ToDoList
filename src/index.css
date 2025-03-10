@@ -1,68 +1,86 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Poppins';
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   margin: 0;
   transition: background 0.3s ease, color 0.3s ease;
-}
-
-.light-mode {
-  background-color: #f0f0f0;
-  color: #333;
+  padding: 20px;
+  background: #F0F0F0;
 }
 
 .dark-mode {
-  background-color: #181818;
+  background-color: #121212;
   color: #EAEAEA;
 }
 
 .app-container {
-  text-align: center;
+  width: 100%;
+  max-width: 500px;
   background: white;
-  padding: 25px;
+  padding: 30px;
   border-radius: 12px;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-  width: 370px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
   transition: background 0.3s ease;
 }
 
 .dark-mode .app-container {
-  background: #222;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+  background: #1E1E1E;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.1);
 }
 
-h1 {
+h2 {
+  text-align: center;
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 1000;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex;
+  gap: 10px;
   margin-bottom: 15px;
 }
 
 input {
-  padding: 10px;
-  width: 65%;
+  flex: 1;
+  padding: 12px;
   border: 2px solid #ccc;
-  border-radius: 6px;
-  background: white;
-  color: #333;
-  font-size: 14px;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border 0.3s ease;
+}
+
+input:focus {
+  border-color: #e7473c;
+  outline: none;
 }
 
 .dark-mode input {
-  background: #333;
+  background: #2C2C2C;
   color: #EAEAEA;
   border: 2px solid #555;
 }
 
 button {
-  padding: 10px 12px;
+  padding: 10px 14px;
   cursor: pointer;
   border: none;
-  border-radius: 6px;
-  font-weight: bold;
+  border-radius: 8px;
+  font-weight: 600;
   font-size: 14px;
   transition: background 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+button i {
+  font-size: 16px;
 }
 
 button:hover {
@@ -72,24 +90,35 @@ button:hover {
 .add-btn {
   background-color: #e7473c;
   color: white;
-  margin-left: 10px;
 }
 
 .add-btn:hover {
   background-color: #c0392b;
 }
 
+.clear-btn {
+  background-color: #333;
+  color: white;
+}
+
+.clear-btn:hover {
+  background-color: #444;
+}
+
 .filter-container {
-  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin: 20px 0;
 }
 
 .filter-container button {
-  margin: 5px;
-  padding: 8px 10px;
-  background: none;
+  padding: 10px 12px;
   border: 2px solid #e7473c;
+  background: none;
   color: #e7473c;
   border-radius: 6px;
+  font-size: 14px;
 }
 
 .filter-container button.active {
@@ -109,23 +138,22 @@ button:hover {
 ul {
   list-style: none;
   padding: 0;
-  margin-top: 10px;
+  margin: 0;
 }
 
 li {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  border-radius: 6px;
-  background: #f8f8f8;
-  margin-bottom: 8px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #F8F8F8;
+  margin-bottom: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease;
 }
 
 .dark-mode li {
-  background: #333;
+  background: #2C2C2C;
   box-shadow: 0 2px 5px rgba(255, 255, 255, 0.1);
 }
 
@@ -133,16 +161,27 @@ li:hover {
   transform: scale(1.02);
 }
 
+.task-text {
+  flex: 1;
+  font-size: 16px;
+}
+
 .completed {
   text-decoration: line-through;
   color: gray;
 }
 
+.task-actions {
+  display: flex;
+  gap: 8px;
+}
+
 .edit-btn, .delete-btn, .save-btn {
-  padding: 6px 8px;
+  padding: 8px;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 14px;
   transition: transform 0.2s ease;
+  font-family: 'Poppins';
 }
 
 .edit-btn {
@@ -175,7 +214,13 @@ li:hover {
 .toggle-btn {
   background-color: #333;
   color: white;
-  margin-top: 10px;
+  width: 100%;
+  text-align: center;
+  margin-top: 15px;
+  padding: 15px;
+  font-size: 15px;
+  font-weight: 1000;
+  font-family: 'Poppins';
 }
 
 .dark-mode .toggle-btn {
@@ -190,4 +235,3 @@ li:hover {
 .dark-mode .toggle-btn:hover {
   background-color: #ddd;
 }
-

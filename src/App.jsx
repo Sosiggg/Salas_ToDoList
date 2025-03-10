@@ -1,4 +1,4 @@
-import TodoList from "./TodoList";
+import TodoList from "./ToDoList";
 import { useState, useEffect } from "react";
 
 function App() {

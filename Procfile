@@ -1,1 +1,1 @@
-web: gunicorn todoproject.todoproject.wsgi:application
+web: daphne todoproject.asgi:application

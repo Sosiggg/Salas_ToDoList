@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function TodoList() {
     const [tasks, setTasks] = useState([]);
@@ -7,22 +7,64 @@ export default function TodoList() {
     const [editingIndex, setEditingIndex] = useState(null);
     const [editedTask, setEditedTask] = useState("");
 
+    useEffect(() => {
+        fetch('http://localhost:8000/api/tasks/')
+            .then((response) => response.json())
+            .then((data) => setTasks(data))
+            .catch((error) => console.error("Error fetching tasks:", error));
+    }, []);
+
     const addTask = () => {
         if (task.trim() === "") return alert("Task cannot be empty!");
-        setTasks([...tasks, { text: task, completed: false }]);
-        setTask("");
+
+        const newTask = { text: task, completed: false };
+
+        fetch('http://localhost:8000/api/tasks/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newTask),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                setTasks([...tasks, data]);
+                setTask("");
+            })
+            .catch((error) => console.error("Error adding task:", error));
     };
 
     const toggleComplete = (index) => {
-        setTasks(tasks.map((t, i) =>
-            i === index ? { ...t, completed: !t.completed } : t
-        ));
+        const updatedTask = { ...tasks[index], completed: !tasks[index].completed };
+        const taskId = tasks[index].id;
+
+        fetch(`http://localhost:8000/api/tasks/${taskId}/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedTask),
+        })
+            .then((response) => response.json())
+            .then(() => {
+                const updatedTasks = tasks.map((t, i) =>
+                    i === index ? { ...t, completed: !t.completed } : t
+                );
+                setTasks(updatedTasks);
+            })
+            .catch((error) => console.error("Error toggling task completion:", error));
     };
 
     const removeTask = (index) => {
-        if (window.confirm("Are you sure you want to delete this task?")) {
-            setTasks(tasks.filter((_, i) => i !== index));
-        }
+        const taskId = tasks[index].id;
+
+        fetch(`http://localhost:8000/api/tasks/${taskId}/`, {
+            method: 'DELETE',
+        })
+            .then(() => {
+                setTasks(tasks.filter((_, i) => i !== index));
+            })
+            .catch((error) => console.error("Error deleting task:", error));
     };
 
     const startEditing = (index) => {
@@ -32,11 +74,27 @@ export default function TodoList() {
 
     const saveEdit = (index) => {
         if (editedTask.trim() === "") return alert("Task cannot be empty!");
-        setTasks(tasks.map((t, i) =>
-            i === index ? { ...t, text: editedTask } : t
-        ));
-        setEditingIndex(null);
-        setEditedTask("");
+
+        const updatedTask = { ...tasks[index], text: editedTask };
+        const taskId = tasks[index].id;
+
+        fetch(`http://localhost:8000/api/tasks/${taskId}/`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(updatedTask),
+        })
+            .then((response) => response.json())
+            .then(() => {
+                const updatedTasks = tasks.map((t, i) =>
+                    i === index ? { ...t, text: editedTask } : t
+                );
+                setTasks(updatedTasks);
+                setEditingIndex(null);
+                setEditedTask("");
+            })
+            .catch((error) => console.error("Error saving edited task:", error));
     };
 
     const filteredTasks = tasks.filter(task => {

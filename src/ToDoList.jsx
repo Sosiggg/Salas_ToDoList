@@ -8,7 +8,7 @@ export default function TodoList() {
     const [editedTask, setEditedTask] = useState("");
 
     useEffect(() => {
-        fetch('http://localhost:8000/api/tasks/')
+        fetch('https://salastodolist.onrender.com/api/tasks/')
             .then((response) => response.json())
             .then((data) => setTasks(data))
             .catch((error) => console.error("Error fetching tasks:", error));
@@ -19,7 +19,7 @@ export default function TodoList() {
 
         const newTask = { text: task, completed: false };
 
-        fetch('http://localhost:8000/api/tasks/', {
+        fetch('https://salastodolist.onrender.com/api/tasks/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,7 +38,7 @@ export default function TodoList() {
         const updatedTask = { ...tasks[index], completed: !tasks[index].completed };
         const taskId = tasks[index].id;
 
-        fetch(`http://localhost:8000/api/tasks/${taskId}/`, {
+        fetch(`https://salastodolist.onrender.com/api/tasks/${taskId}/`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ export default function TodoList() {
     const removeTask = (index) => {
         const taskId = tasks[index].id;
 
-        fetch(`http://localhost:8000/api/tasks/${taskId}/`, {
+        fetch(`https://salastodolist.onrender.com/api/tasks/${taskId}/`, {
             method: 'DELETE',
         })
             .then(() => {
@@ -78,7 +78,7 @@ export default function TodoList() {
         const updatedTask = { ...tasks[index], text: editedTask };
         const taskId = tasks[index].id;
 
-        fetch(`http://localhost:8000/api/tasks/${taskId}/`, {
+        fetch(`https://salastodolist.onrender.com/api/tasks/${taskId}/`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

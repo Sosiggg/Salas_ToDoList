@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-)kg#9om(e@&jtjf%jb#j6^2x32h%a*u4$8bfxlvlxvnz2%j6z^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['salastodolist.onrender.com', '127.0.0.1']
 
 
 # Application definition
@@ -130,6 +130,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173", 
+    "https://salastodolist.netlify.app", 
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True

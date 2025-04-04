@@ -1,5 +1,20 @@
 import { useState, useEffect } from "react";
 
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
 export default function TodoList() {
     const [tasks, setTasks] = useState([]);
     const [task, setTask] = useState("");
@@ -8,7 +23,9 @@ export default function TodoList() {
     const [editedTask, setEditedTask] = useState("");
 
     useEffect(() => {
-        fetch('https://salastodolist.onrender.com/api/tasks/')
+        fetch('https://salastodolist.onrender.com/api/tasks/', {
+            credentials: 'include'
+        })
             .then((response) => response.json())
             .then((data) => setTasks(data))
             .catch((error) => console.error("Error fetching tasks:", error));
@@ -23,7 +40,9 @@ export default function TodoList() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
             },
+            credentials: 'include',
             body: JSON.stringify(newTask),
         })
             .then((response) => response.json())
@@ -42,7 +61,9 @@ export default function TodoList() {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
             },
+            credentials: 'include',
             body: JSON.stringify(updatedTask),
         })
             .then((response) => response.json())
@@ -60,6 +81,10 @@ export default function TodoList() {
 
         fetch(`https://salastodolist.onrender.com/api/tasks/${taskId}/`, {
             method: 'DELETE',
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken'),
+            },
+            credentials: 'include',
         })
             .then(() => {
                 setTasks(tasks.filter((_, i) => i !== index));
@@ -82,7 +107,9 @@ export default function TodoList() {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken'),
             },
+            credentials: 'include',
             body: JSON.stringify(updatedTask),
         })
             .then((response) => response.json())

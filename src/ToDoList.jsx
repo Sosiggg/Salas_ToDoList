@@ -23,7 +23,7 @@ export default function TodoList() {
     const [editedTask, setEditedTask] = useState("");
 
     useEffect(() => {
-        fetch('https://salastodolist.onrender.com/api/tasks/', {
+        fetch('https://salastodolist-vcn5.onrender.com/api/tasks/', {
             credentials: 'include'
         })
             .then((response) => response.json())
@@ -36,7 +36,7 @@ export default function TodoList() {
 
         const newTask = { text: task, completed: false };
 
-        fetch('https://salastodolist.onrender.com/api/tasks/', {
+        fetch('https://salastodolist-vcn5.onrender.com/api/tasks/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export default function TodoList() {
         const updatedTask = { ...tasks[index], completed: !tasks[index].completed };
         const taskId = tasks[index].id;
 
-        fetch(`https://salastodolist.onrender.com/api/tasks/${taskId}/`, {
+        fetch(`https://salastodolist-vcn5.onrender.com/api/tasks/${taskId}/`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +79,7 @@ export default function TodoList() {
     const removeTask = (index) => {
         const taskId = tasks[index].id;
 
-        fetch(`https://salastodolist.onrender.com/api/tasks/${taskId}/`, {
+        fetch(`https://salastodolist-vcn5.onrender.com/api/tasks/${taskId}/`, {
             method: 'DELETE',
             headers: {
                 'X-CSRFToken': getCookie('csrftoken'),
@@ -103,7 +103,7 @@ export default function TodoList() {
         const updatedTask = { ...tasks[index], text: editedTask };
         const taskId = tasks[index].id;
 
-        fetch(`https://salastodolist.onrender.com/api/tasks/${taskId}/`, {
+        fetch(`https://salastodolist-vcn5.onrender.com/api/tasks/${taskId}/`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

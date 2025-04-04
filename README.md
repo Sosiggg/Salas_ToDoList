@@ -1,9 +1,9 @@
-*Salas' To-Do List API*
+# **Salas' To-Do List API**
 
-Base URL
+**Base URL**
 https://salastodolist-vcn5.onrender.com
 
-Endpoints
+**Endpoints**
 1. Root Endpoint
 
     URL: https://salastodolist-vcn5.onrender.com/api/
@@ -31,3 +31,7 @@ Endpoints
         PATCH: Update a task.
 
         DELETE: Delete a task.
+
+**Superusers**
+user: admin
+pass: admin123

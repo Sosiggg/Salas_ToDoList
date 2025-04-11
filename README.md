@@ -1,12 +1,39 @@
-# React + Vite
+# **Salas' To-Do List API**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Base URL**
+https://salastodolist-vcn5.onrender.com
 
-Currently, two official plugins are available:
+**Endpoints**
+1. Root Endpoint
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    URL: https://salastodolist-vcn5.onrender.com/api/
 
-## Expanding the ESLint configuration
+    Method: GET
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+    Description: Welcome message and list of available endpoints.
+
+2. List Tasks
+
+    URL: https://salastodolist-vcn5.onrender.com/api/tasks/
+
+    Methods:
+
+        GET: Get all tasks.
+
+        POST: Create a new task.
+
+3. Task Detail
+
+    URL: https://salastodolist-vcn5.onrender.com/api/tasks/ insert existing task id here (ex. 1) /
+   
+   https://salastodolist-vcn5.onrender.com/api/tasks/1/
+
+    Methods:
+
+        PATCH: Update a task.
+
+        DELETE: Delete a task.
+
+**Superusers**
+user: admin
+pass: admin123

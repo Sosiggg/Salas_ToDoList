@@ -21,15 +21,20 @@ export default function TodoList() {
     const [filter, setFilter] = useState("all");
     const [editingIndex, setEditingIndex] = useState(null);
     const [editedTask, setEditedTask] = useState("");
+    const token = '883aa870c9639608366cbf2c18d286910b21d5c6'; // your auth token
 
     useEffect(() => {
         fetch('https://salastodolist-vcn5.onrender.com/api/tasks/', {
-            credentials: 'include'
+            method: 'GET',
+            headers: {
+                'Authorization': `Token ${token}`,
+            },
+            credentials: 'include',
         })
             .then((response) => response.json())
             .then((data) => setTasks(data))
             .catch((error) => console.error("Error fetching tasks:", error));
-    }, []);
+    }, [token]);
 
     const addTask = () => {
         if (task.trim() === "") return alert("Task cannot be empty!");
@@ -40,6 +45,7 @@ export default function TodoList() {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`,
                 'X-CSRFToken': getCookie('csrftoken'),
             },
             credentials: 'include',
@@ -61,6 +67,7 @@ export default function TodoList() {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`,
                 'X-CSRFToken': getCookie('csrftoken'),
             },
             credentials: 'include',
@@ -82,6 +89,7 @@ export default function TodoList() {
         fetch(`https://salastodolist-vcn5.onrender.com/api/tasks/${taskId}/`, {
             method: 'DELETE',
             headers: {
+                'Authorization': `Token ${token}`,
                 'X-CSRFToken': getCookie('csrftoken'),
             },
             credentials: 'include',
@@ -107,6 +115,7 @@ export default function TodoList() {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`,
                 'X-CSRFToken': getCookie('csrftoken'),
             },
             credentials: 'include',
